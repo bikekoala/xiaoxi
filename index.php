@@ -1,8 +1,4 @@
 <?PHP
-/**
- * Index
- */
-
 // set envs
 include 'common/conf.ini.php';
 error_reporting(FALSE);

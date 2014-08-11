@@ -4,5 +4,5 @@
  */
 include 'func.php';
 
-// 加载指令字典
+// load dicts
 $dict = parse_dict(include('dict.ini'));
