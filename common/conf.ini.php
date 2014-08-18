@@ -5,4 +5,4 @@
 include 'func.php';
 
 // load dicts
-$dict = parse_dict(include('dict.ini'));
+$dicts = parse_dict(__DIR__ . '/dict.ini');
