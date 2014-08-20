@@ -21,7 +21,7 @@ foreach ($dicts as $item) {
 
     if ( ! include('app/' . $item['app'] . '.class.php')) break;
     try {
-        $msg = $item['app']::$item['mod']($item['val']);
+        $msg = $item['app']::$item['mod']($item['val'] ? : str_replace($item['key'], '', $instruction));
         $isErr = FALSE;
         break;
     } catch (Exception $e) {
