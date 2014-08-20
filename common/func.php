@@ -4,6 +4,47 @@
  */
 
 /**
+ * cn2num
+ * 汉字数字转阿拉伯数字
+ *
+ * @param string $str
+ * @return float
+ */
+function cn2num($str) {
+    $dicts = array(
+        '零' => '0',
+        '一' => '1',
+        '二' => '2',
+        '三' => '3',
+        '四' => '4',
+        '五' => '5',
+        '六' => '6',
+        '七' => '7',
+        '八' => '8',
+        '九' => '9',
+        '十' => '',
+        '百' => '00',
+        '点' => '.',
+    );
+
+    if (is_numeric($str)) {
+        return (float) $str;
+    }
+
+    $newStr = '';
+    for ($i=0, $n=strlen($str); $i<$n; ++$i) {
+        if (ord($str[$i]) < 128) {
+            $char = $str[$i];
+        } else {
+            $char = substr($str, $i, 3);
+            $i += 2;
+        }
+        $newStr .= isset($dicts[$char]) ? $dicts[$char] : $char;
+    }
+    return (float) $newStr;
+}
+
+/**
  * parse_dict
  * 分析指令字典配置
  *
