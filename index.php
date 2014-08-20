@@ -10,10 +10,23 @@ $deviceTime = (int) $_GET['deviceTime'] ? : output('无效的设备时间', TRUE
 $latitude = trim($_GET['latitude']);
 $longitude = trim($_GET['longitude']);
 
-// output data
-$request = compact('deviceId', 'deviceTime', 'instruction', 'latitude', 'longitude');
-$response = '';
-foreach ($request as $k => $v) {
-    $response .= $k . ': ' . $v . PHP_EOL;
+// dispatch
+$isErr = TRUE;
+$msg = 'Hey! 我家有只小毛驴呀我从来也不骑~';
+
+foreach ($dicts as $item) {
+    foreach ($item['key'] as $key) {
+        if (FALSE === strpos($instruction, $key)) continue 2;
+    }
+
+    if ( ! include('app/' . $item['app'] . '.class.php')) break;
+    try {
+        $msg = $item['app']::$item['mod']($item['val']);
+        $isErr = FALSE;
+        break;
+    } catch (Exception $e) {
+        $msg = $e->getMessage();
+    }
 }
-output($response);
+
+output($msg, $isErr);

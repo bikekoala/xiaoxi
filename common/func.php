@@ -70,7 +70,6 @@ function parse_dict($path) {
         }
     }
 
-    sort($dicts);
     return $dicts;
 }
 
